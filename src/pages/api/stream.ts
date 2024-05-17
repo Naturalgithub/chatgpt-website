@@ -7,8 +7,13 @@ import {
 
 const localEnv = import.meta.env.OPENAI_API_KEY
 const vercelEnv = process.env.OPENAI_API_KEY
+const INIT_PASSWORD = import.meta.env.INIT_PASSWORD
 
-const apiKeys = ((localEnv || vercelEnv)?.split(/\s*\|\s*/) ?? []).filter(
+// const apiKeys = ((localEnv || vercelEnv)?.split(/\s*\|\s*/) ?? []).filter(
+//   Boolean
+// )
+
+const apiKeys = ((vercelEnv)?.split(/\s*\|\s*/) ?? []).filter(
   Boolean
 )
 
@@ -22,7 +27,7 @@ export const post: APIRoute = async context => {
   const encoder = new TextEncoder()
   const decoder = new TextDecoder()
 
-  if (!key.startsWith("sk-")) key = apiKey
+  if (!key.startsWith("sk-")) key = apiKey == INIT_PASSWORD ? localEnv : apiKey
   if (!key) {
     return new Response("没有填写 OpenAI API key")
   }
