@@ -63,6 +63,7 @@ export const post: APIRoute = async context => {
             //     { delta: { content: '你' }, index: 0, finish_reason: null }
             //   ],
             // }
+
             const json = JSON.parse(data)
             const text = json.choices[0]?.delta?.content
             const queue = encoder.encode(text)
