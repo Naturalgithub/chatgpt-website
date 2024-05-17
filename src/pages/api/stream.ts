@@ -30,7 +30,7 @@ export const post: APIRoute = async context => {
     return new Response("没有输入任何文字")
   }
 
-  const completion = await fetch("https://api.openai.com/v1/chat/completions", {
+  const completion = await fetch("https://cn2us02.opapi.win/v1/chat/completions", {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${key}`
@@ -64,7 +64,7 @@ export const post: APIRoute = async context => {
             //   ],
             // }
             const json = JSON.parse(data)
-            const text = json.choices[0].delta?.content
+            const text = json.choices[0]?.delta?.content
             const queue = encoder.encode(text)
             controller.enqueue(queue)
           } catch (e) {
