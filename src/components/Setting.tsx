@@ -22,7 +22,7 @@ export default function Setting(props: {
     if (key) {
       props.setSetting({
         ...props.setting(),
-        openaiAPIKey: `sk-${key}`
+        openaiAPIKey: key.startsWith('sk') ? key : `sk-${key}`
       })
     }
   })
