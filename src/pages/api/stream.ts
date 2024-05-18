@@ -28,7 +28,7 @@ export const post: APIRoute = async context => {
 
   // if (!key.startsWith("sk-")) key = apiKey
 
-  if (key == (INIT_PASSWORD || vercelINIT_PASSWORD)) key = apiKey
+  if (key == (vercelINIT_PASSWORD || INIT_PASSWORD)) key = apiKey
 
   if (!key) {
     return new Response("没有填写 OpenAI API key")
