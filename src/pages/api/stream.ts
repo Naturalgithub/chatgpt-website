@@ -4,6 +4,7 @@ import {
   ParsedEvent,
   ReconnectInterval
 } from "eventsource-parser"
+import { USER_VIP } from '../../utils/dict'
 
 const localEnv = import.meta.env.OPENAI_API_KEY
 const vercelEnv = process.env.OPENAI_API_KEY
@@ -30,12 +31,16 @@ export const post: APIRoute = async context => {
 
   if (key == (vercelINIT_PASSWORD || INIT_PASSWORD)) key = apiKey
 
+  Object.hasOwnProperty.call(USER_VIP, key.replace(/sk-/gi, '')) && (key = apiKey)
+
   if (!key) {
     return new Response("没有填写 OpenAI API key")
   }
   if (!messages) {
     return new Response("没有输入任何文字")
   }
+
+
 
 
   console.log("🐒🐒 ~ file: stream.ts:27 ~ key:", key)
