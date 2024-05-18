@@ -8,4 +8,7 @@ export const USER_VIP = {
     "temp202405": {
         dest: '马骝通用2'
     },
+    "meichun": {
+        dest: '马骝通用2'
+    },
 }
