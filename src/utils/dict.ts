@@ -1,4 +1,4 @@
-const USER_VIP = {
+export const USER_VIP = {
     "maliu": {
         dest: '马骝通用'
     },
