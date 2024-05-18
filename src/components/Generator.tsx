@@ -1,14 +1,14 @@
-import { createEffect, createSignal, For, onMount, Show } from "solid-js"
 import { createResizeObserver } from "@solid-primitives/resize-observer"
-import MessageItem from "./MessageItem"
-import type { ChatMessage } from "~/types"
-import Setting from "./Setting"
-import PromptList from "./PromptList"
-import prompts from "~/prompts"
 import { Fzf } from "fzf"
-import { defaultMessage, defaultSetting } from "~/default"
 import throttle from "just-throttle"
+import { createEffect, createSignal, For, onMount, Show } from "solid-js"
+import { defaultMessage, defaultSetting } from "~/default"
+import prompts from "~/prompts"
+import type { ChatMessage } from "~/types"
 import { isMobile } from "~/utils"
+import MessageItem from "./MessageItem"
+import PromptList from "./PromptList"
+import Setting from "./Setting"
 
 export interface PromptItem {
   desc: string
@@ -131,9 +131,9 @@ export default function () {
     if (
       !value ||
       value !==
-        messageList()
-          .filter(k => k.role === "user")
-          .at(-1)?.content
+      messageList()
+        .filter(k => k.role === "user")
+        .at(-1)?.content
     ) {
       setMessageList([
         ...messageList(),
@@ -229,10 +229,9 @@ export default function () {
     setCompatiblePrompt([])
     const { scrollHeight } = inputRef
     setHeight(
-      `${
-        scrollHeight > window.innerHeight - 64
-          ? window.innerHeight - 64
-          : scrollHeight
+      `${scrollHeight > window.innerHeight - 64
+        ? window.innerHeight - 64
+        : scrollHeight
       }px`
     )
     inputRef.focus()
@@ -254,11 +253,11 @@ export default function () {
           containerWidth() === "init"
             ? {}
             : {
-                transition: "opacity 0.3s ease-in-out",
-                width: containerWidth(),
-                opacity: 100,
-                "background-color": "var(--c-bg)"
-              }
+              transition: "opacity 0.3s ease-in-out",
+              width: containerWidth(),
+              opacity: 100,
+              "background-color": "var(--c-bg)"
+            }
         }
       >
         <Show when={!compatiblePrompt().length && height() === "48px"}>
@@ -320,10 +319,9 @@ export default function () {
                 setHeight("48px")
                 const { scrollHeight } = e.currentTarget
                 setHeight(
-                  `${
-                    scrollHeight > window.innerHeight - 64
-                      ? window.innerHeight - 64
-                      : scrollHeight
+                  `${scrollHeight > window.innerHeight - 64
+                    ? window.innerHeight - 64
+                    : scrollHeight
                   }px`
                 )
                 let { value } = e.currentTarget

@@ -2,6 +2,7 @@ import {
   Accessor,
   createSignal,
   JSXElement,
+  onMount,
   Setter,
   Show
 } from "solid-js"
@@ -14,6 +15,18 @@ export default function Setting(props: {
   reAnswer: any
 }) {
   const [shown, setShown] = createSignal(false)
+  onMount(() => {
+    // 获取路由 params ?key 的参数
+    const urlParams = new URLSearchParams(window.location.search)
+    const key = urlParams.get('key')
+    if (key) {
+      props.setSetting({
+        ...props.setting(),
+        openaiAPIKey: '123'
+      })
+    }
+  })
+
   return (
     <div class="text-sm text-slate mb-2">
       <Show when={shown()}>
