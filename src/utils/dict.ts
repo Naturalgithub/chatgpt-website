@@ -7,9 +7,9 @@ export const USER_VIP = {
         dest: '马骝通用2',
         key: 'sk-KGICSIFn738e98147507T3BLbKFJ1Bff87B00ffE4fAaB31B'
     },
-    "temp202405": {
-        dest: '马骝通用2',
-        key: 'sk-KGICSIFn738e98147507T3BLbKFJ1Bff87B00ffE4fAaB31B'
+    "temp": {
+        dest: '临时密钥',
+        key: 'sk-FGONbWZy89E5844FC0e5T3BLBkFJeD79Ff5b82f5404291F8'
     },
     "meichun": {
         dest: '梅春',
