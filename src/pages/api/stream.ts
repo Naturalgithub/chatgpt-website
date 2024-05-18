@@ -8,14 +8,13 @@ import {
 const localEnv = import.meta.env.OPENAI_API_KEY
 const vercelEnv = process.env.OPENAI_API_KEY
 const INIT_PASSWORD = import.meta.env.INIT_PASSWORD
+const vercelINIT_PASSWORD = process.env.INIT_PASSWORD
 
-// const apiKeys = ((localEnv || vercelEnv)?.split(/\s*\|\s*/) ?? []).filter(
-//   Boolean
-// )
 
-const apiKeys = ((vercelEnv)?.split(/\s*\|\s*/) ?? []).filter(
+const apiKeys = ((localEnv || vercelEnv)?.split(/\s*\|\s*/) ?? []).filter(
   Boolean
 )
+
 
 export const post: APIRoute = async context => {
   const body = await context.request.json()
@@ -27,13 +26,20 @@ export const post: APIRoute = async context => {
   const encoder = new TextEncoder()
   const decoder = new TextDecoder()
 
-  if (!key.startsWith("sk-")) key = apiKey == INIT_PASSWORD ? localEnv : apiKey
+  // if (!key.startsWith("sk-")) key = apiKey
+
+  if (key == (INIT_PASSWORD || vercelINIT_PASSWORD)) key = apiKey
+
   if (!key) {
     return new Response("没有填写 OpenAI API key")
   }
   if (!messages) {
     return new Response("没有输入任何文字")
   }
+
+
+  console.log("🐒🐒 ~ file: stream.ts:27 ~ key:", key)
+
 
   const completion = await fetch("https://cn2us02.opapi.win/v1/chat/completions", {
     headers: {
@@ -68,7 +74,6 @@ export const post: APIRoute = async context => {
             //     { delta: { content: '你' }, index: 0, finish_reason: null }
             //   ],
             // }
-
             const json = JSON.parse(data)
             const text = json.choices[0]?.delta?.content
             const queue = encoder.encode(text)

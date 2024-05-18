@@ -1,6 +1,5 @@
 import {
   Accessor,
-  children,
   createSignal,
   JSXElement,
   Setter,
@@ -18,7 +17,7 @@ export default function Setting(props: {
   return (
     <div class="text-sm text-slate mb-2">
       <Show when={shown()}>
-        <SettingItem icon="i-carbon:api" label="OpenAI API Key">
+        <SettingItem icon="i-carbon:api" label="密钥（联系管理员获取）">
           <input
             type="password"
             value={props.setting().openaiAPIKey}
